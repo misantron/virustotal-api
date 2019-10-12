@@ -1,0 +1,26 @@
+{
+  "name": "misantron/virustotal-api",
+  "description": "VirusTotal API PHP client",
+  "keywords": [ "virustotal", "api", "php" ],
+  "license": "MIT",
+  "type": "library",
+  "require": {
+    "php": "^7.2",
+    "symfony/http-client": "^4.3"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.15",
+    "phpunit/phpunit": "^8.4",
+    "squizlabs/php_codesniffer": "^3.5"
+  },
+  "autoload": {
+    "psr-4": { "Misantron\\VirusTotal\\": "src/" }
+  },
+  "autoload-dev": {
+    "psr-4": { "Misantron\\VirusTotal\\Tests\\": "tests/" }
+  },
+  "config": {
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}
