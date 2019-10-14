@@ -7,6 +7,7 @@
         colors="true">
     <php>
         <env name="API_KEY" value="16b86ee31dd7dfe34f33c68999130b8e7aa572ec63ea9e2c1bf69938c18a368a"/>
+        <env name="ENDPOINT" value="https://www.virustotal.com/vtapi/v2/"/>
     </php>
     <testsuites>
         <testsuite name="default">

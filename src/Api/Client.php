@@ -42,19 +42,21 @@ final class Client
      * @param  array  $options
      *
      * @return Response
+     *
+     * @throws HttpRequestException
      */
     public function request(string $method, string $uri, array $options = []): Response
     {
         switch (strtolower($method)) {
-        case 'post':
-            $options['headers']['Content-Type'] = 'application/x-www-form-urlencoded';
-            $options['body']['apikey'] = $this->key;
-            break;
-        case 'get':
-            $options['query']['apikey'] = $this->key;
-            break;
-        default:
-            throw new HttpRequestException('Unexpected request method');
+            case 'post':
+                $options['headers']['Content-Type'] = 'application/x-www-form-urlencoded';
+                $options['body']['apikey'] = $this->key;
+                break;
+            case 'get':
+                $options['query']['apikey'] = $this->key;
+                break;
+            default:
+                throw new HttpRequestException('Unexpected request method.');
         }
 
         try {
@@ -62,21 +64,17 @@ final class Client
             return Response::createWithPayload($response->toArray());
         } catch (TransportException $e) {
             if ($response->getStatusCode() === 204 && $response->getContent() === '') {
-                return Response::createWithError('Daily limits exceeded');
+                return Response::createWithError('Daily limits exceeded.');
             }
-
-            throw new HttpRequestException($e->getMessage());
         } catch (ClientException $e) {
             if ($response->getStatusCode() === 400) {
-                return Response::createWithError('Daily limits exceeded');
+                return Response::createWithError('Invalid arguments provided.');
             }
             if ($response->getStatusCode() === 403) {
-                return Response::createWithError('Daily limits exceeded');
+                return Response::createWithError('Invalid API key. Access denied.');
             }
-
-            throw new HttpRequestException($e->getMessage());
-        } finally {
-            throw new HttpRequestException('Unknown request error');
+        } catch (\Throwable $e) {
+            throw new HttpRequestException('Unknown request error.');
         }
     }
 }
