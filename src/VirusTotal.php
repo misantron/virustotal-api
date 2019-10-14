@@ -28,7 +28,7 @@ final class VirusTotal
     private function __construct(string $key, string $endpoint)
     {
         if (trim($key) === '') {
-            throw new InvalidArgumentException('API key is not defined');
+            throw new InvalidArgumentException('API key is not defined.');
         }
 
         $this->createDefaultClient($key, $endpoint);
@@ -55,7 +55,7 @@ final class VirusTotal
     {
         $resource = __NAMESPACE__ . '\\Resources\\' . ucfirst($name);
         if (!class_exists($resource)) {
-            throw new InvalidArgumentException('Unknown API resource');
+            throw new InvalidArgumentException('Unknown API resource.');
         }
         return new $resource($this->client);
     }

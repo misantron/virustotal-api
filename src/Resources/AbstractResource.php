@@ -29,5 +29,5 @@ abstract class AbstractResource
     /**
      * @return string
      */
-    abstract protected function basePath(): string;
+    abstract public function basePath(): string;
 }
